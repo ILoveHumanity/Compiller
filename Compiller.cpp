@@ -20,13 +20,14 @@ public:
 };
 
 leksema Lexical_tokenizator(std::ifstream& program_file, int& str_number, int& str_position, int& error_flag) {
-    char Ci;
+    unsigned char Ci;
     std::string name; 
     int value, index;
-    std::string a = "+-*/()[];,"; std::string a1 = "><";
-    std::vector<int> b = { 3,4,5,6,7,8,16,17,24,29 };
-    std::vector<std::string> function_words_a { "if", "endif", "else", "endelse", "while", "endwihle", "read", "write", "int", "int1" };
-    std::vector<int> function_words_b = { 18,19,20,21,22,23,25,26,27,28 };
+    std::string a = "+-*/()[];,"; 
+    std::string a1 = "><";
+    std::vector<int> b = { 3,4,5,6,7,8,16,17,24,29 }; // номера лексем из a
+    std::vector<std::string> function_words_a { "if", "endif", "else", "endelse", "while", "endwihle", "read", "write", "int", "int1" }; // служебные слова
+    std::vector<int> function_words_b = { 18,19,20,21,22,23,25,26,27,28 }; // номера лексем служебных слов из function_words_a
     std::vector<std::string>::iterator is_fw;
     leksema res;
     S:
@@ -83,7 +84,6 @@ leksema Lexical_tokenizator(std::ifstream& program_file, int& str_number, int& s
             goto Z;
         }
         error_flag = 1;
-        ++str_position; // ?
         goto Z;
     B:
         Ci = program_file.peek();
@@ -104,30 +104,11 @@ leksema Lexical_tokenizator(std::ifstream& program_file, int& str_number, int& s
             res.set_l_type( function_words_b[is_fw - begin(function_words_a)] );
             goto Z;
         }
-        /*
-        switch (name) { // 8
-            case function_words[0]: return 18; break;
-            case function_words[1]: return 19; break;
-            case function_words[4]: return 20; break;
-            case function_words[5]: return 21; break;
-            case function_words[2]: return 22; break;
-            case function_words[3]: return 23; break;
-            case function_words[6]: return 27; break;
-            case function_words[7]: return 28; break;
-            case function_words[8]: return 25; break;
-            case function_words[9]: return 26; break;
-            default:    res.set_l_type(2);
-                        res.set_name(name);
-                        goto Z;
-        }
-        */
-        //-----------------//
 
     C:
         Ci = program_file.peek();
 
         if (isalpha(Ci)) {
-            ++str_position; // ?
             error_flag = 2;
             goto Z;
         }
@@ -138,8 +119,6 @@ leksema Lexical_tokenizator(std::ifstream& program_file, int& str_number, int& s
             goto C;
         }
         res.set_l_type(1); res.set_value(value); // 9
-        program_file.get();
-        ++str_position;
         goto Z; 
          
     A:
@@ -163,7 +142,6 @@ leksema Lexical_tokenizator(std::ifstream& program_file, int& str_number, int& s
             ++str_position;
             goto Z;
         }
-        ++str_position; // ?
         error_flag = 3;
         goto Z;
 
@@ -186,12 +164,14 @@ int main()
 {
     SetConsoleCP(1251); // устанавливаем кодировку для ввода\вывода на консоль
     SetConsoleOutputCP(1251);
-    std::ifstream program_file("prog.txt");
+    std::ifstream program_file("prog.txt"); // программа пишется в файле
+    if (!program_file.is_open()) { return 0; }
     int index;
+    std::vector<std::string>leksema_list = { "конец программы", "константа", "переменная", "+", "-", "*", "/", "(", ")" , "=" , "==" , "!=" , ">" , "<" , ">=" , "<=" , "[" , "]" , "if" , "endif" , "else" , "endelse" , "while" , "endwhile" , ";" , "read" , "write" , "int" , "int1", "," };
+    std::vector<std::string>error_list = { "Недопустимый символ в программе.", "Лексема не распознана: Что-то", "Лексема не распознана: ожидалось !=." };
     bool end_flag = true; int error_flag = 0, str_number = 1, str_position = 1;
     leksema x;
-    std::vector<std::string>leksema_list = { "конец программы", "константа", "переменная", "+", "-", "*", "/", "(", ")" , "=" , "==" , "!=" , ">" , "<" , ">=" , "<=" , "[" , "]" , "if" , "endif" , "else" , "endelse" , "while" , "endwhile" , ";" , "read" , "write" , "int" , "int1", "," };
-    
+
     while (error_flag == 0 && end_flag) {
         x = Lexical_tokenizator(program_file, str_number, str_position, error_flag);
         if (error_flag == 0) {
@@ -213,17 +193,10 @@ int main()
             }
         }
     }
-    std::cout << "Строка: " << str_number << " Позиция: " << str_position << " Код ошибки: " << error_flag << "\nОписание: " << std::endl;
+    if (error_flag > 0) {
+        std::cout << "Строка: " << str_number << " Позиция: " << str_position << " Код ошибки: " << error_flag << "\nОписание: " << error_list[error_flag - 1] << std::endl;
+    }
+    
     program_file.close();
     return 0;
 }
-
-
-
-// Советы по началу работы 
-//   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
-//   2. В окне Team Explorer можно подключиться к системе управления версиями.
-//   3. В окне "Выходные данные" можно просматривать выходные данные сборки и другие сообщения.
-//   4. В окне "Список ошибок" можно просматривать ошибки.
-//   5. Последовательно выберите пункты меню "Проект" > "Добавить новый элемент", чтобы создать файлы кода, или "Проект" > "Добавить существующий элемент", чтобы добавить в проект существующие файлы кода.
-//   6. Чтобы снова открыть этот проект позже, выберите пункты меню "Файл" > "Открыть" > "Проект" и выберите SLN-файл.
