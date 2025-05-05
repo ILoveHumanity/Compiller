@@ -19,7 +19,7 @@ public:
     void set_value(int a) { value = a; }
 };
 
-leksema Lexical_tokenizator(std::ifstream& program_file, int& str_number, int& str_position, int& error_flag) {
+leksema Lexical_tokenizator(std::ifstream& program_file, int& str_number, int& str_position, int& error_flag) { // Лексический анализатор
     unsigned char Ci;
     std::string name; 
     int value, index;
@@ -33,74 +33,74 @@ leksema Lexical_tokenizator(std::ifstream& program_file, int& str_number, int& s
     S:
         Ci = program_file.peek();
 
-        if (isalpha(Ci)) {
+        if (isalpha(Ci)) { // проверка на букву
             name = Ci; // 1
             program_file.get();
             ++str_position;
             goto B;
         }
-        if (isdigit(Ci)) {
+        if (isdigit(Ci)) { // проверка на цифру
             value = Ci - '0'; // 2
             program_file.get();
             ++str_position;
             goto C;
         }
-        if ((index = a.find(Ci)) != std::string::npos) {
+        if ((index = a.find(Ci)) != std::string::npos) { // проверка на наличие в +-*/()[];,
             res.set_l_type(b[index]); // 5
             program_file.get();
             ++str_position;
             goto Z;
         }
-        if (Ci == '=') {
+        if (Ci == '=') { // проверка на =
             program_file.get();
             ++str_position;
             goto A;
         }
-        if (Ci == '!') {
+        if (Ci == '!') { // проверка на !
             program_file.get();
             ++str_position;
             goto D;
         }
-        if ((index = a1.find(Ci)) != std::string::npos) { // 1
+        if ((index = a1.find(Ci)) != std::string::npos) { // проверка на наличие в >< , 1
             program_file.get();
             ++str_position;
             goto E;
         }
-        if (isblank(Ci)) {
+        if (isblank(Ci)) { // проверка на пробел и табуляцию
             program_file.get();
             ++str_position;
             goto S;
         }
-        if (Ci == '\n') {
+        if (Ci == '\n') {  // проверка на перевод строки
             program_file.get();
             str_position = 1; // 14
             ++str_number;
             goto S;
         }
-        if (program_file.eof()) {
+        if (program_file.eof()) { // проверка на конец файла
             res.set_l_type(0);
             program_file.get();
             ++str_position;
             goto Z;
         }
-        error_flag = 1;
+        error_flag = 1;  // ошибка: недопустимый символ языка
         goto Z;
     B:
         Ci = program_file.peek();
 
-        if (isalnum(Ci)) {
+        if (isalnum(Ci)) { // проверка на букву или цифру
             name += Ci; // 4
             program_file.get();
             ++str_position;
             goto B;
         }
-        is_fw = std::find(begin(function_words_a), end(function_words_a), name);
-        if (is_fw == end(function_words_a)) { // не найдено
+        is_fw = std::find(begin(function_words_a), end(function_words_a), name); // 8
+        if (is_fw == end(function_words_a)) { // не найдено значит имя переменной
             res.set_l_type(2);
             res.set_name(name);
             goto Z;
         } 
-        else { 
+        else { // иначе служебное слово
             res.set_l_type( function_words_b[is_fw - begin(function_words_a)] );
             goto Z;
         }
@@ -108,11 +108,11 @@ leksema Lexical_tokenizator(std::ifstream& program_file, int& str_number, int& s
     C:
         Ci = program_file.peek();
 
-        if (isalpha(Ci)) {
-            error_flag = 2;
+        if (isalpha(Ci)) { // проверка на букву
+            error_flag = 2; // ошибка
             goto Z;
         }
-        if (isdigit(Ci)) {
+        if (isdigit(Ci)) { // проверка на цифру
             value = value * 10 + (Ci - '0'); // 3
             program_file.get();
             ++str_position;
@@ -124,7 +124,7 @@ leksema Lexical_tokenizator(std::ifstream& program_file, int& str_number, int& s
     A:
         Ci = program_file.peek();
 
-        if (Ci == '=') {
+        if (Ci == '=') { // проверка на =
             res.set_l_type(10); // 10
             program_file.get();
             ++str_position;
@@ -136,19 +136,19 @@ leksema Lexical_tokenizator(std::ifstream& program_file, int& str_number, int& s
     D:
         Ci = program_file.peek();
 
-        if (Ci == '=') {
+        if (Ci == '=') { // проверка на =
             res.set_l_type(11); // 12
             program_file.get();
             ++str_position;
             goto Z;
         }
-        error_flag = 3;
+        error_flag = 3; // ошибка не !=
         goto Z;
 
     E:
         Ci = program_file.peek();
 
-        if (Ci == '=') {
+        if (Ci == '=') { // проверка на =
             res.set_l_type(14 + index); // 6
             program_file.get();
             ++str_position;
