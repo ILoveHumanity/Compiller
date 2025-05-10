@@ -25,7 +25,7 @@ public:
     void set_start_str_number(int a) { start_str_number = a; }
 };
 
-leksema Lexical_tokenizator(std::ifstream& program_file, int& str_number, int& str_position, int& error_flag) { // Лексический анализатор
+leksema Lexical_tokenizator(std::ifstream& program_file, int& str_number, int& str_position, bool& error_flag) { // Лексический анализатор
     unsigned char Ci;
     std::string name;
     int value, index;
@@ -91,7 +91,8 @@ S:
         ++str_position;
         goto Z;
     }
-    error_flag = 1;  // ошибка: недопустимый символ языка
+    std::cout << "Строка: " << str_number << " Позиция: " << str_position << "\nОписание: " << "Лексема не распознана: Недопустимый символ в программе." << std::endl;
+    error_flag = true;  // ошибка: недопустимый символ языка
     goto Z;
 B:
     Ci = program_file.peek();
@@ -117,7 +118,8 @@ C:
     Ci = program_file.peek();
 
     if (isalpha(Ci)) { // проверка на букву
-        error_flag = 2; // ошибка
+        std::cout << "Строка: " << str_number << " Позиция: " << str_position << "\nОписание: " << "Лексема не распознана: неожиданный символ." << std::endl;
+        error_flag = true;  // ошибка
         goto Z;
     }
     if (isdigit(Ci)) { // проверка на цифру
@@ -150,7 +152,8 @@ D:
         ++str_position;
         goto Z;
     }
-    error_flag = 3; // ошибка не !=
+    std::cout << "Строка: " << str_number << " Позиция: " << str_position << "\nОписание: " << "Лексема не распознана: ожидалось !=." << std::endl;
+    error_flag = true; // ошибка не !=
     goto Z;
 
 E:
@@ -176,13 +179,12 @@ int main()
     if (!program_file.is_open()) { return 0; }
     int index;
     std::vector<std::string>leksema_list = { "конец программы", "константа", "переменная", "+", "-", "*", "/", "(", ")" , "=" , "==" , "!=" , ">" , "<" , ">=" , "<=" , "[" , "]" , "if" , "endif" , "else" , "endelse" , "while" , "endwhile" , ";" , "read" , "write" , "int" , "int1", "," };
-    std::vector<std::string>error_list = { "Лексема не распознана: Недопустимый символ в программе.", "Лексема не распознана: неожиданный символ.", "Лексема не распознана: ожидалось !=." };
-    bool end_flag = true; int error_flag = 0, str_number = 1, str_position = 1;
+    bool end_flag = true, error_flag = false; int str_number = 1, str_position = 1;
     leksema x;
 
-    while (error_flag == 0 && end_flag) {
+    while (!error_flag && end_flag) {
         x = Lexical_tokenizator(program_file, str_number, str_position, error_flag);
-        if (error_flag == 0) {
+        if (!error_flag) {
             index = x.get_l_type();
             switch (index) {
             case 0:
@@ -200,9 +202,6 @@ int main()
                 break;
             }
         }
-    }
-    if (error_flag > 0) {
-        std::cout << "Строка: " << str_number << " Позиция: " << str_position << " Код ошибки: " << error_flag << "\nОписание: " << error_list[error_flag - 1] << std::endl;
     }
 
     program_file.close();
