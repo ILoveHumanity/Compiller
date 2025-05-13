@@ -32,7 +32,7 @@ leksema Lexical_tokenizator(std::ifstream& program_file, int& str_number, int& s
     std::string a = "+-*/()[];,";
     std::string a1 = "><";
     std::vector<int> b = { 3,4,5,6,7,8,16,17,24,29 }; // номера лексем из a
-    std::vector<std::string> function_words_a{ "if", "endif", "else", "endelse", "while", "endwihle", "read", "write", "int", "int1" }; // служебные слова
+    std::vector<std::string> function_words_a{ "if", "endif", "else", "endelse", "while", "endwhile", "read", "write", "int", "int1" }; // служебные слова
     std::vector<int> function_words_b = { 18,19,20,21,22,23,25,26,27,28 }; // номера лексем служебных слов из function_words_a
     std::vector<std::string>::iterator is_fw;
     leksema res;
