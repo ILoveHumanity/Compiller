@@ -1442,11 +1442,11 @@ int main()
                 std::cout << "Константа / метка:\t" << OPC[i].value << std::endl;
                 break;
             case 2:
-                std::cout << "Переменная:\t\t" << *(std::string*)((int)OPC[i].a - sizeof(std::string)) << std::endl;
+                std::cout << "Переменная:\t\t" << *(std::string*)((long long)OPC[i].a - sizeof(std::string)) << std::endl;
                 //std::cout << "Переменная:\t\t" << OPC[i].a << std::endl;
                 break;
             case 3:
-                std::cout << "Массив:\t\t\t" << *(std::string*)((int)OPC[i].m - sizeof(std::string)) << std::endl;
+                std::cout << "Массив:\t\t\t" << *(std::string*)((long long)OPC[i].m - sizeof(std::string)) << std::endl;
                 //std::cout << "Массив:\t\t\t" << OPC[i].m << std::endl;
                 break;
             default:
