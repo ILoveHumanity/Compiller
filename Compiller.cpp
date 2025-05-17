@@ -1427,6 +1427,8 @@ int main()
     std::ifstream program_file("prog.txt"); // программа пишется в файле
     if (!program_file.is_open()) { return 0; }
     bool error_flag = false;
+    Var_table.reserve(SHRT_MAX);
+    Passport_table.reserve(SHRT_MAX);
     std::vector<OPC_element> OPC;
     OPC = imply_Grammar(program_file, error_flag);
     if (!error_flag) {
@@ -1440,10 +1442,12 @@ int main()
                 std::cout << "Константа / метка:\t" << OPC[i].value << std::endl;
                 break;
             case 2:
-                std::cout << "Переменная:\t\t" << OPC[i].a << std::endl;
+                std::cout << "Переменная:\t\t" << *(std::string*)((int)OPC[i].a - sizeof(std::string)) << std::endl;
+                //std::cout << "Переменная:\t\t" << OPC[i].a << std::endl;
                 break;
             case 3:
-                std::cout << "Массив:\t\t\t" << OPC[i].m << std::endl;
+                std::cout << "Массив:\t\t\t" << *(std::string*)((int)OPC[i].m - sizeof(std::string)) << std::endl;
+                //std::cout << "Массив:\t\t\t" << OPC[i].m << std::endl;
                 break;
             default:
                 std::cout << "ОШИБКА" << std::endl;
