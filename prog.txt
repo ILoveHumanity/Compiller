@@ -1,4 +1,4 @@
-sadf 456 df()-=3 d
+
 
 int n, i;
 read(n);
