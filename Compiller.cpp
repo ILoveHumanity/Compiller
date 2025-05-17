@@ -292,6 +292,7 @@ struct Passport_table_element {
 *
 */
 std::vector<std::string> leksema_list = { "конец программы", "константа", "переменная", "+", "-", "*", "/", "(", ")" , "=" , "==" , "!=" , ">" , "<" , ">=" , "<=" , "[" , "]" , "if" , "endif" , "else" , "endelse" , "while" , "endwhile" , ";" , "read" , "write" , "int" , "int1", "," };
+std::vector<std::string> OPC_operation_list = {"+", "-", "*" , "/" , "=" , "==" , ">=" , "<=" , ">" , "<" , "!=" , "~" , "read" , "write" , "Выделение памяти" , "Индексация" , "jf (переход по условию ложь)" , "j (безусловный переход)" , "Освобождение памяти" };
 std::vector<Var_table_element> Var_table; // Таблица переменных
 std::vector<Passport_table_element> Passport_table; // Таблица паспартов массивов
 
@@ -1436,7 +1437,7 @@ int main()
             switch (OPC[i].element_type)
             {
             case 0:
-                std::cout << "Операция:\t\t" << OPC[i].value << std::endl;
+                std::cout << "Операция:\t\t" << OPC_operation_list[ OPC[i].value - 1 ] << std::endl;
                 break;
             case 1:
                 std::cout << "Константа / метка:\t" << OPC[i].value << std::endl;
