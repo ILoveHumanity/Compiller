@@ -1,10 +1,8 @@
-
-
 int n, i;
 read(n);
 int1 m[n];
 i = 0;
-while(i < n) read(m[i]); i = i - 1; endwhile;
+while(i < n) read(m[i]); i = i + 1; endwhile;
 int t, tt, end;
 end = n;
 while(end > 1) i = 1; t = m[0]; 

@@ -78,6 +78,68 @@ void leksema::set_start_str_number(int a) {
     start_str_number = a;
 }
 
+struct Gramar_stack_element {
+    int leks_number;        // номер лексеммы (если лексемма)
+    /* leks_number<0    <->    не лексемма, а нетерминал     */
+    char name;           // название нетерминала
+
+    Gramar_stack_element(int n = NULL, char nam = NULL) {
+        leks_number = n;
+        name = nam;
+    }
+};
+struct Mas_passport {
+    int size;               // кол-во ячеек
+    int* link;              // ссылка на начало массива
+
+    Mas_passport(int n = NULL) {
+        size = n;
+        link = NULL;
+    }
+};
+struct OPC_element {
+    int element_type;           // номер смыслового элемента
+    int value;                  // значение константы (если element_type = 1)
+    int* a;                     // ссылка на значение переменной (если element_type = 2)
+    Mas_passport* m;            // ссылка на паспорт массива (если element_type = 3)
+    int str_number;             // позиция соответствующей лексеммы (строка)
+    int str_position;           // позиция соответствующей лексеммы (символ в строке)
+
+    OPC_element(int t = NULL, int v = NULL, int* a1 = NULL, Mas_passport* m1 = NULL, int sn = NULL, int sp = NULL) {
+        element_type = t;           // номер смыслового элемента
+        value = v;                  // значение (
+        a = a1;
+        m = m1;
+        str_number = sn;
+        str_position = sp;
+    }
+};
+struct Var_table_element {          // таблица переменных
+    std::string name;               // название переменной
+    int a;                          // значение переменной
+
+    Var_table_element(std::string name1 = "", int a1 = 0) {
+        name = name1;
+        a = a1;
+    }
+};
+struct Passport_table_element {         // паспорт массива
+    std::string name;                   // название массива
+    Mas_passport m;                     // под-структура для адреса начала и количества ячеек
+
+    Passport_table_element(std::string name1 = "", int n = 0) {
+        name = name1;
+        m = Mas_passport(n);
+    }
+};
+
+// вспомогательный (для вывода) список лексемм
+std::vector<std::string> leksema_list = { "конец программы", "константа", "переменная", "+", "-", "*", "/", "(", ")" , "=" , "==" , "!=" , ">" , "<" , ">=" , "<=" , "[" , "]" , "if" , "endif" , "else" , "endelse" , "while" , "endwhile" , ";" , "read" , "write" , "int" , "int1", "," };
+// вспомгательный (для вывода) список операций ОПС
+std::vector<std::string> OPC_operation_list = { "+", "-", "*" , "/" , "=" , "==" , ">=" , "<=" , ">" , "<" , "!=" , "~" , "read" , "write" , "Выделение памяти" , "Индексация" , "jf (переход по условию ложь)" , "j (безусловный переход)" , "Освобождение памяти" };
+std::vector<Var_table_element> Var_table; // Таблица переменных
+std::vector<Passport_table_element> Passport_table; // Таблица паспартов массивов
+
 leksema Lexical_tokenizator(std::ifstream& program_file, int& str_number, int& str_position, bool& error_flag) { // Лексический анализатор
     unsigned char Ci;
     std::string name;
@@ -227,60 +289,7 @@ Z:
     return res;
 };
 
-struct Gramar_stack_element {
-    int leks_number;        // номер лексеммы (если лексемма)
-    /* leks_number<0    <->    не лексемма, а нетерминал     */
-    char name;           // название нетерминала
 
-    Gramar_stack_element(int n = NULL, char nam = NULL) {
-        leks_number = n;
-        name = nam;
-    }
-};
-struct Mas_passport {
-    int size;               // кол-во ячеек
-    int* link;              // ссылка на начало массива
-
-    Mas_passport(int n = NULL) {
-        size = n;
-        link = NULL;
-    }
-};
-struct OPC_element {
-    int element_type;           // номер смыслового элемента
-    int value;                  // значение константы (если element_type = 1)
-    int* a;                     // ссылка на значение переменной (если element_type = 2)
-    Mas_passport* m;            // ссылка на паспорт массива (если element_type = 3)
-    int str_number;             // позиция соответствующей лексеммы (строка)
-    int str_position;           // позиция соответствующей лексеммы (символ в строке)
-
-    OPC_element(int t = NULL, int v = NULL, int* a1 = NULL, Mas_passport* m1 = NULL, int sn = NULL, int sp = NULL) {
-        element_type = t;           // номер смыслового элемента
-        value = v;                  // значение (
-        a = a1;
-        m = m1;
-        str_number = sn;
-        str_position = sp;
-    }
-};
-struct Var_table_element {          // таблица переменных
-    std::string name;               // название переменной
-    int a;                          // значение переменной
-
-    Var_table_element(std::string name1 = "", int a1 = 0) {
-        name = name1;
-        a = a1;
-    }
-};
-struct Passport_table_element {         // паспорт массива
-    std::string name;                   // название массива
-    Mas_passport m;                     // под-структура для адреса начала и количества ячеек
-
-    Passport_table_element(std::string name1 = "", int n = 0) {
-        name = name1;
-        m = Mas_passport(n);
-    }
-};
 
 /*
 * program_file - файл с проверяемой программов
@@ -292,13 +301,6 @@ struct Passport_table_element {         // паспорт массива
 *
 */
 
-
-// вспомогательный (для вывода) список лексемм
-std::vector<std::string> leksema_list = { "конец программы", "константа", "переменная", "+", "-", "*", "/", "(", ")" , "=" , "==" , "!=" , ">" , "<" , ">=" , "<=" , "[" , "]" , "if" , "endif" , "else" , "endelse" , "while" , "endwhile" , ";" , "read" , "write" , "int" , "int1", "," };
-// вспомгательный (для вывода) список операций ОПС
-std::vector<std::string> OPC_operation_list = { "+", "-", "*" , "/" , "=" , "==" , ">=" , "<=" , ">" , "<" , "!=" , "~" , "read" , "write" , "Выделение памяти" , "Индексация" , "jf (переход по условию ложь)" , "j (безусловный переход)" , "Освобождение памяти" };
-std::vector<Var_table_element> Var_table; // Таблица переменных
-std::vector<Passport_table_element> Passport_table; // Таблица паспартов массивов
 
 std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_flag) {
     bool end_of_program_flag = false;           // флаг конца программы
@@ -1518,12 +1520,344 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
             break;
 
         default:
-            std::cout << "отладочная ошибка";
+            std::cout << "отладочная ошибка 1";
             break;
         }
     }
     return OPC;
 };
+
+struct OPC_operand
+{
+    int operand_type;           // номер смыслового элемента
+    int value;                  // значение константы (если element_type = 1)
+    int* a;                     // ссылка на значение переменной (если element_type = 2)
+    Mas_passport* m;            // ссылка на паспорт массива (если element_type = 3)
+
+    OPC_operand(int t = NULL, int v = NULL, int* a1 = NULL, Mas_passport* m1 = NULL) {
+        operand_type = t;           // номер смыслового элемента
+        value = v;                  // значение (
+        a = a1;
+        m = m1;
+    }
+    OPC_operand(OPC_element& temp) {
+        operand_type = temp.element_type; // номер смыслового элемента
+        value = temp.value; // значение
+        a = temp.a;
+        m = temp.m;
+    }
+    int get() {
+        switch (operand_type)
+        {
+        case 1:
+            return value;
+        case 2:
+            return *a;
+        case 3:
+            return *(m->link);
+        }
+        std::cout << "отладочная ошибка 2";
+    }
+    void set(int temp) {
+        switch (operand_type)
+        {
+        case 2:
+            *a = temp;
+            break;
+        case 3:
+            *(m->link) = temp;
+            break;
+        default:
+            std::cout << "отладочная ошибка 3";
+            break;
+        }
+        
+        return;
+    }
+};
+
+void Compute_OPC(std::vector<OPC_element>& OPC, bool error_flag) {
+    std::stack<OPC_operand> OPS_operand_stack; // магазин интерпретатора ОПС
+    OPC_operand first_operand, second_operand;
+    int fog, sog, result;
+    int* id_res;
+
+    for (long long i = 0; i < OPC.size() && !error_flag; ++i) {
+        if (OPC[i].element_type == 0) { // операция
+            switch (OPC[i].value)
+            {
+            case 1:  // +
+                second_operand = OPS_operand_stack.top();
+                OPS_operand_stack.pop();
+                sog = second_operand.get();
+                first_operand = OPS_operand_stack.top();
+                OPS_operand_stack.pop();
+                fog = first_operand.get();
+
+                if ((fog > 0)  && (sog > 0) && (fog > INT_MAX - sog)) {
+                    error_flag = true;
+                    std::cout << "Строка: " << OPC[i].str_number << " Позиция: " << OPC[i].str_position
+                        << "\nОписание: Переполнение памяти при выполнении операции \"" << OPC_operation_list[OPC[i].value - 1] << '"' << std::endl;
+                }
+                else if ((fog < 0) && (sog < 0) && (fog > INT_MIN - sog)) {
+                    error_flag = true;
+                    std::cout << "Строка: " << OPC[i].str_number << " Позиция: " << OPC[i].str_position
+                        << "\nОписание: Переполнение памяти при выполнении операции \"" << OPC_operation_list[OPC[i].value - 1] << '"' << std::endl;
+                }
+                else {
+                    result = fog + sog;
+                    OPS_operand_stack.push(OPC_operand(1, result, NULL, NULL));
+                }
+                break;
+
+            case 2:  // -
+                second_operand = OPS_operand_stack.top();
+                OPS_operand_stack.pop();
+                sog = second_operand.get();
+                first_operand = OPS_operand_stack.top();
+                OPS_operand_stack.pop();
+                fog = first_operand.get();
+
+                if ((fog > 0) && (sog < 0) && (fog > INT_MAX + sog)) {
+                    error_flag = true;
+                    std::cout << "Строка: " << OPC[i].str_number << " Позиция: " << OPC[i].str_position
+                        << "\nОписание: Переполнение памяти при выполнении операции." << std::endl;
+                }
+                else if ((fog < 0) && (sog > 0) && (fog > INT_MIN + sog)) {
+                    error_flag = true;
+                    std::cout << "Строка: " << OPC[i].str_number << " Позиция: " << OPC[i].str_position
+                        << "\nОписание: Переполнение памяти при выполнении операции." << std::endl;
+                }
+                else {
+                    result = fog - sog;
+                    OPS_operand_stack.push(OPC_operand(1, result, NULL, NULL));
+                }
+                break;
+
+            case 3:  // *
+                second_operand = OPS_operand_stack.top();
+                OPS_operand_stack.pop();
+                sog = second_operand.get();
+                first_operand = OPS_operand_stack.top();
+                OPS_operand_stack.pop();
+                fog = first_operand.get();
+
+                result = fog * sog;
+                OPS_operand_stack.push(OPC_operand(1, result, NULL, NULL));
+                break;
+
+            case 4:  // /
+                second_operand = OPS_operand_stack.top();
+                OPS_operand_stack.pop();
+                sog = second_operand.get();
+                first_operand = OPS_operand_stack.top();
+                OPS_operand_stack.pop();
+                fog = first_operand.get();
+
+                if (sog == 0) {
+                    error_flag = true;
+                    std::cout << "Строка: " << OPC[i].str_number << " Позиция: " << OPC[i].str_position
+                        << "\nОписание: Деление на ноль." << std::endl;
+                }
+                else {
+                    result = fog / sog;
+                    OPS_operand_stack.push(OPC_operand(1, result, NULL, NULL));
+                }
+                break;
+
+            case 5:  // =
+                second_operand = OPS_operand_stack.top();
+                OPS_operand_stack.pop();
+                sog = second_operand.get();
+                first_operand = OPS_operand_stack.top();
+                OPS_operand_stack.pop();
+                
+                first_operand.set(sog);
+                OPS_operand_stack.push(first_operand);
+                break;
+
+            case 6:  // ==
+                second_operand = OPS_operand_stack.top();
+                OPS_operand_stack.pop();
+                sog = second_operand.get();
+                first_operand = OPS_operand_stack.top();
+                OPS_operand_stack.pop();
+                fog = first_operand.get();
+
+                if (fog == sog) { OPS_operand_stack.push(OPC_operand(1, 1, NULL, NULL)); }
+                else { OPS_operand_stack.push(OPC_operand(1, 0, NULL, NULL)); }
+                break;
+
+            case 7:  // >=    
+                second_operand = OPS_operand_stack.top();
+                OPS_operand_stack.pop();
+                sog = second_operand.get();
+                first_operand = OPS_operand_stack.top();
+                OPS_operand_stack.pop();
+                fog = first_operand.get();
+
+                if (fog >= sog) { OPS_operand_stack.push(OPC_operand(1, 1, NULL, NULL)); }
+                else { OPS_operand_stack.push(OPC_operand(1, 0, NULL, NULL)); }
+                break;
+                break;
+
+            case 8:  // <=     
+                second_operand = OPS_operand_stack.top();
+                OPS_operand_stack.pop();
+                sog = second_operand.get();
+                first_operand = OPS_operand_stack.top();
+                OPS_operand_stack.pop();
+                fog = first_operand.get();
+
+                if (fog <= sog) { OPS_operand_stack.push(OPC_operand(1, 1, NULL, NULL)); }
+                else { OPS_operand_stack.push(OPC_operand(1, 0, NULL, NULL)); }
+                break;
+
+            case 9:  // >
+                second_operand = OPS_operand_stack.top();
+                OPS_operand_stack.pop();
+                sog = second_operand.get();
+                first_operand = OPS_operand_stack.top();
+                OPS_operand_stack.pop();
+                fog = first_operand.get();
+
+                if (fog > sog) { OPS_operand_stack.push(OPC_operand(1, 1, NULL, NULL)); }
+                else { OPS_operand_stack.push(OPC_operand(1, 0, NULL, NULL)); }
+                break;
+
+            case 10: // <
+                second_operand = OPS_operand_stack.top();
+                OPS_operand_stack.pop();
+                sog = second_operand.get();
+                first_operand = OPS_operand_stack.top();
+                OPS_operand_stack.pop();
+                fog = first_operand.get();
+
+                if (fog < sog) { OPS_operand_stack.push(OPC_operand(1, 1, NULL, NULL)); }
+                else { OPS_operand_stack.push(OPC_operand(1, 0, NULL, NULL)); }
+                break;
+
+            case 11: // !=
+                second_operand = OPS_operand_stack.top();
+                OPS_operand_stack.pop();
+                sog = second_operand.get();
+                first_operand = OPS_operand_stack.top();
+                OPS_operand_stack.pop();
+                fog = first_operand.get();
+
+                if (fog != sog) { OPS_operand_stack.push(OPC_operand(1, 1, NULL, NULL)); }
+                else { OPS_operand_stack.push(OPC_operand(1, 0, NULL, NULL)); }
+                break;
+
+            case 12: // ~
+                first_operand = OPS_operand_stack.top();
+                OPS_operand_stack.pop();
+                fog = first_operand.get();
+
+                if (fog == INT_MIN) {
+                    error_flag = true;
+                    std::cout << "Строка: " << OPC[i].str_number << " Позиция: " << OPC[i].str_position
+                        << "\nОписание: Переполнение памяти при выполнении операции." << std::endl;
+                }
+                else {
+                    OPS_operand_stack.push(OPC_operand(1, -fog, NULL, NULL));
+                }
+                break;
+
+            case 13: // r
+                first_operand = OPS_operand_stack.top();
+                OPS_operand_stack.pop();
+
+                if (first_operand.operand_type == 2) { std::cin >> *first_operand.a; }
+                else { std::cin >> *first_operand.m->link; }
+                break;
+
+            case 14: // w
+                first_operand = OPS_operand_stack.top();
+                OPS_operand_stack.pop();
+                fog = first_operand.get();
+                std::cout << fog << ' ';//<< std::endl;
+                break;
+
+            case 15: // m
+                second_operand = OPS_operand_stack.top();
+                OPS_operand_stack.pop();
+                sog = second_operand.get();
+                first_operand = OPS_operand_stack.top();
+                OPS_operand_stack.pop();
+
+                if (sog <= 0) {
+                    error_flag = true;
+                    std::cout << "Строка: " << OPC[i].str_number << " Позиция: " << OPC[i].str_position
+                        << "\nОписание: Некорректное значение для выделения памяти." << std::endl;
+                }
+                else {
+                    first_operand.m->size = sog;
+                    first_operand.m->link = new int[sog];
+                }
+                break;
+            case 16: // i
+                second_operand = OPS_operand_stack.top();
+                OPS_operand_stack.pop();
+                sog = second_operand.get();
+                first_operand = OPS_operand_stack.top();
+                OPS_operand_stack.pop();
+
+                if (sog < 0 || sog >= first_operand.m->size) {
+                    error_flag = true;
+                    std::cout << "Строка: " << OPC[i].str_number << " Позиция: " << OPC[i].str_position
+                        << "\nОписание: Выход за пределы массива." << std::endl;
+                }
+                else {
+                    id_res = first_operand.m->link + sog;
+                    OPS_operand_stack.push(OPC_operand(2, NULL, id_res, NULL));
+                }
+                break;
+
+            case 17: // jf (переход по условию ложь)
+                second_operand = OPS_operand_stack.top();
+                OPS_operand_stack.pop();
+                sog = second_operand.get();
+                first_operand = OPS_operand_stack.top();
+                OPS_operand_stack.pop();
+                fog = first_operand.get();
+
+                if (fog == 0) {
+                    i = sog - 1;
+                }
+                break;
+
+            case 18: // j (безусловный переход)
+                first_operand = OPS_operand_stack.top();
+                OPS_operand_stack.pop();
+                fog = first_operand.get();
+
+                i = fog - 1;
+                break;
+
+            case 19: // Освобождение памяти
+                for (int j = 0; j < Passport_table.size(); ++j) {
+                    delete(Passport_table[j].m.link);
+                }
+                break;
+
+            default:
+                std::cout << "отладочная ошибка 4";
+                break;
+            }
+        }
+        else { // операнд
+            OPS_operand_stack.push(OPC[i]);
+        }
+    }
+    if (error_flag) { // Освобождение памяти при ошибке
+        for (int j = 0; j < Passport_table.size(); ++j) {
+            delete(Passport_table[j].m.link);
+        }
+    }
+    return;
+};
+
 
 int main()
 {
@@ -1539,6 +1873,7 @@ int main()
 
     if (!error_flag) {
         for (int i = 0; i < OPC.size(); ++i) {
+            std::cout << i << ' ';
             switch (OPC[i].element_type)
             {
             case 0:
@@ -1555,7 +1890,7 @@ int main()
                 //std::cout << "Переменная:\t\t" << &Var_table[0].name << "\t" << (std::string*)((long long)OPC[i].a - sizeof(std::string)) << std::endl;
                 break;
             case 3:
-                std::cout << "Массив:\t\t\t" << *(std::string*)((long long)OPC[i].m - sizeof(std::string)) << std::endl;
+                std::cout << "Массив:\t\t" << *(std::string*)((long long)OPC[i].m - sizeof(std::string)) << std::endl;
                 //std::cout << "Массив:\t\t\t" << OPC[i].m << '\t'<<std::endl;
                 break;
             default:
@@ -1564,6 +1899,8 @@ int main()
             }
         }
     }
+    std::cout << "\n\n---------------Вычисление ОПС---------------\n\n";
+    Compute_OPC(OPC, error_flag);
 
     program_file.close();
     return 0;
