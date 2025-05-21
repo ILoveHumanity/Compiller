@@ -343,7 +343,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                 switch (input_leks.get_l_type())    // разбор случаев по текущей лексемме
                 {
                 case 2: // leksema = a  |   X -> aH=SZ;PZ
-                        //              |        a□□□=□□9                                    
+                    //              |        a□□□=□□9                                    
                     t.leks_number = -1; t.name = 'Z';   g_stack.push(t);    // Z
                     t.leks_number = -1; t.name = 'P';   g_stack.push(t);    // P
                     t.leks_number = 24;                 g_stack.push(t);    // ;
@@ -367,7 +367,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                     break;
 
                 case 18: // leksema = if    |   X -> if(C) P endif EZ; PZ
-                         //                 |        □ □□1 □   □   □3□ □9
+                    //                 |        □ □□1 □   □   □3□ □9
                     t.leks_number = -1; t.name = 'Z';   g_stack.push(t);    // Z
                     t.leks_number = -1; t.name = 'P';   g_stack.push(t);    // P
                     t.leks_number = 24;                 g_stack.push(t);    // ;
@@ -394,7 +394,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                     break;
 
                 case 22: // leksema = while     |   X -> while(C) P endwhile Z; PZ
-                         //                     |          4  □□1 □     □    5□ □9
+                    //                     |          4  □□1 □     □    5□ □9
                     t.leks_number = -1; t.name = 'Z';   g_stack.push(t);    // Z
                     t.leks_number = -1; t.name = 'P';   g_stack.push(t);    // P
                     t.leks_number = 24;                 g_stack.push(t);    // ;
@@ -419,7 +419,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                     break;
 
                 case 25: // leksema = read  |   X -> read(aH); PZ
-                         //                 |          □ □a□r□ □9
+                    //                 |          □ □a□r□ □9
                     t.leks_number = -1; t.name = 'Z';   g_stack.push(t);    // Z
                     t.leks_number = -1; t.name = 'P';   g_stack.push(t);    // P
                     t.leks_number = 24;                 g_stack.push(t);    // ;
@@ -443,7 +443,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                     break;
 
                 case 26: // leksema = write     |   X -> write(S); PZ
-                         //                     |           □ □□w□ □9
+                    //                     |           □ □□w□ □9
                     t.leks_number = -1; t.name = 'Z';   g_stack.push(t);    // Z
                     t.leks_number = -1; t.name = 'P';   g_stack.push(t);    // P
                     t.leks_number = 24;                 g_stack.push(t);    // ;
@@ -465,7 +465,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                     break;
 
                 case 27: // leksema = int   |   X -> int R; PZ
-                         //                 |          □ □□ □9
+                    //                 |          □ □□ □9
                     t.leks_number = -1; t.name = 'Z';   g_stack.push(t);    // Z
                     t.leks_number = -1; t.name = 'P';   g_stack.push(t);    // P
                     t.leks_number = 24;                 g_stack.push(t);    // ;
@@ -480,7 +480,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                     break;
 
                 case 28: // leksema = int1  |   X -> int1 N; PZ
-                         //                 |          □  □□ □9
+                    //                 |          □  □□ □9
                     t.leks_number = -1; t.name = 'Z';   g_stack.push(t);    // Z
                     t.leks_number = -1; t.name = 'P';   g_stack.push(t);    // P
                     t.leks_number = 24;                 g_stack.push(t);    // ;
@@ -508,7 +508,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                 switch (input_leks.get_l_type())
                 {
                 case 2: // leksema = a  |   P -> aH=SZ;P
-                        //              |        a□□□=□□
+                    //              |        a□□□=□□
                     t.leks_number = -1; t.name = 'P';   g_stack.push(t);    // P
                     t.leks_number = 24;                 g_stack.push(t);    // ;
                     t.leks_number = -1; t.name = 'Z';   g_stack.push(t);    // Z
@@ -530,7 +530,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                     break;
 
                 case 18: // leksema = if    |   P -> if(C) P endif EZ; P
-                         //                 |         □□□1 □    □  □3□ □
+                    //                 |         □□□1 □    □  □3□ □
                     t.leks_number = -1; t.name = 'P';   g_stack.push(t);    // P
                     t.leks_number = 24;                 g_stack.push(t);    // ;
                     t.leks_number = -1; t.name = 'Z';   g_stack.push(t);    // Z
@@ -555,7 +555,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                     break;
 
                 case 22: // leksema = while |   P -> while(C) P endwhile Z; P
-                         //                 |           4 □□1 □     □    5□ □
+                    //                 |           4 □□1 □     □    5□ □
                     t.leks_number = -1; t.name = 'P';   g_stack.push(t);    // P
                     t.leks_number = 24;                 g_stack.push(t);    // ;
                     t.leks_number = -1; t.name = 'Z';   g_stack.push(t);    // Z
@@ -578,7 +578,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                     break;
 
                 case 25: // leksema = read  |   P -> read(aH); P
-                         //                 |         □  □a□r□ □
+                    //                 |         □  □a□r□ □
                     t.leks_number = -1; t.name = 'P';   g_stack.push(t);    // P
                     t.leks_number = 24;                 g_stack.push(t);    // ;
                     t.leks_number = 8;                  g_stack.push(t);    // )
@@ -600,7 +600,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                     break;
 
                 case 26: // leksema = write     |   P -> write(S); P
-                         //                     |           □ □□w□ □
+                    //                     |           □ □□w□ □
                     t.leks_number = -1; t.name = 'P';   g_stack.push(t);    // P
                     t.leks_number = 24;                 g_stack.push(t);    // ;
                     t.leks_number = 8;                  g_stack.push(t);    // )
@@ -620,7 +620,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                     break;
 
                 case 27: // leksema = int   |   P -> int R; P
-                         //                           □  □□ □
+                    //                           □  □□ □
                     t.leks_number = -1; t.name = 'P';   g_stack.push(t);    // P
                     t.leks_number = 24;                 g_stack.push(t);    // ;
                     t.leks_number = -1; t.name = 'R';   g_stack.push(t);    // R
@@ -633,7 +633,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                     break;
 
                 case 28: // leksema = int1  |   P -> int1 N; P
-                         //                 |          □  □□ □
+                    //                 |          □  □□ □
                     t.leks_number = -1; t.name = 'P';   g_stack.push(t);    // P
                     t.leks_number = 24;                 g_stack.push(t);    // ;
                     t.leks_number = -1; t.name = 'N';   g_stack.push(t);    // N
@@ -656,7 +656,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                 switch (input_leks.get_l_type())
                 {
                 case 1: // leksema = const (k) | S  ->  kVU
-                        //                     |        k□□
+                    //                     |        k□□
                     t.leks_number = -1; t.name = 'U';   g_stack.push(t);    // U
                     t.leks_number = -1; t.name = 'V';   g_stack.push(t);    // V
                     t.leks_number = 1;                  g_stack.push(t);    // k
@@ -667,7 +667,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                     break;
 
                 case 2: // leksema = a | S  ->  aHVU
-                        //             |        a□□□
+                    //             |        a□□□
                     t.leks_number = -1; t.name = 'U';   g_stack.push(t);    // U
                     t.leks_number = -1; t.name = 'V';   g_stack.push(t);    // V
                     t.leks_number = -1; t.name = 'H';   g_stack.push(t);    // H
@@ -680,7 +680,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                     break;
 
                 case 3: // leksema = + | S  ->  +GVU
-                        //             |        □□□□
+                    //             |        □□□□
                     t.leks_number = -1; t.name = 'U';   g_stack.push(t);    // U
                     t.leks_number = -1; t.name = 'V';   g_stack.push(t);    // V
                     t.leks_number = -1; t.name = 'G';   g_stack.push(t);    // G
@@ -693,7 +693,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                     break;
 
                 case 4: // leksema = - | S  ->  -GVU
-                        //             |        □□~□
+                    //             |        □□~□
                     t.leks_number = -1; t.name = 'U';   g_stack.push(t);    // U
                     t.leks_number = -1; t.name = 'V';   g_stack.push(t);    // V
                     t.leks_number = -1; t.name = 'G';   g_stack.push(t);    // G
@@ -709,7 +709,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                     break;
 
                 case 7: // leksema = ( | S  ->  (S)VU
-                        //             |        □□□□□
+                    //             |        □□□□□
                     t.leks_number = -1; t.name = 'U';   g_stack.push(t);    // U
                     t.leks_number = -1; t.name = 'V';   g_stack.push(t);    // V
                     t.leks_number = 8;                  g_stack.push(t);    // )
@@ -737,7 +737,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                 switch (input_leks.get_l_type())
                 {
                 case 3: // leksema = +  |   U -> +TU
-                        //              |        □□+
+                    //              |        □□+
                     t.leks_number = -1; t.name = 'U';   g_stack.push(t);    // U
                     t.leks_number = -1; t.name = 'T';   g_stack.push(t);    // T
                     t.leks_number = 3;                  g_stack.push(t);    // +
@@ -751,7 +751,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                     break;
 
                 case 4: // leksema = -  |   U -> -TU
-                        //              |        □□-
+                    //              |        □□-
                     t.leks_number = -1; t.name = 'U';   g_stack.push(t);    // U
                     t.leks_number = -1; t.name = 'T';   g_stack.push(t);    // T
                     t.leks_number = 4;                  g_stack.push(t);    // -
@@ -775,7 +775,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                 switch (input_leks.get_l_type())
                 {
                 case 1: // leksema = k (константа)  |   T -> kV
-                        //                          |        k□
+                    //                          |        k□
                     t.leks_number = -1; t.name = 'V';   g_stack.push(t);    // V
                     t.leks_number = 1;                  g_stack.push(t);    // k
 
@@ -784,7 +784,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                     break;
 
                 case 2: // leksema = a | T  ->  aHV
-                        //             |        a□□
+                    //             |        a□□
                     t.leks_number = -1; t.name = 'V';   g_stack.push(t);    // V
                     t.leks_number = -1; t.name = 'H';   g_stack.push(t);    // H
                     t.leks_number = 2;                  g_stack.push(t);    // a
@@ -795,7 +795,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                     break;
 
                 case 3: // leksema = + | T  ->  +GV
-                        //             |        □□□
+                    //             |        □□□
                     t.leks_number = -1; t.name = 'V';   g_stack.push(t);    // V
                     t.leks_number = -1; t.name = 'G';   g_stack.push(t);    // G
                     t.leks_number = 3;                  g_stack.push(t);    // +
@@ -806,7 +806,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                     break;
 
                 case 4: // leksema = - | T   ->  -GV
-                        //             |         □□~
+                    //             |         □□~
                     t.leks_number = -1; t.name = 'V';   g_stack.push(t);    // V
                     t.leks_number = -1; t.name = 'G';   g_stack.push(t);    // G
                     t.leks_number = 4;                  g_stack.push(t);    // -
@@ -821,7 +821,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                     break;
 
                 case 7: // leksema = (  |   T -> (S)V
-                        //              |        □□□□
+                    //              |        □□□□
                     t.leks_number = -1; t.name = 'V';   g_stack.push(t);    // V
                     t.leks_number = 8;                  g_stack.push(t);    // )
                     t.leks_number = -1; t.name = 'S';   g_stack.push(t);    // S
@@ -847,7 +847,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                 switch (input_leks.get_l_type())
                 {
                 case 5: // leksema = *  |   V -> *FV
-                        //              |        □□*
+                    //              |        □□*
                     t.leks_number = -1; t.name = 'V';   g_stack.push(t);    // V
                     t.leks_number = -1; t.name = 'F';   g_stack.push(t);    // F
                     t.leks_number = 5;                  g_stack.push(t);    // *
@@ -861,7 +861,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                     break;
 
                 case 6: // leksema = /  |   V -> /FV
-                        //              |        □□/
+                    //              |        □□/
                     t.leks_number = -1; t.name = 'V';   g_stack.push(t);    // V
                     t.leks_number = -1; t.name = 'F';   g_stack.push(t);    // F
                     t.leks_number = 6;                  g_stack.push(t);    // /
@@ -885,14 +885,14 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                 switch (input_leks.get_l_type())
                 {
                 case 1: // leksema = k  |   F -> k
-                        //              |        k
+                    //              |        k
                     t.leks_number = 1;                  g_stack.push(t);    // k
 
                     gen_opc_stack.push(18); // k
                     break;
 
                 case 2: // leksema = a  |   F -> aH
-                        //              |        a□
+                    //              |        a□
                     t.leks_number = -1; t.name = 'H';   g_stack.push(t);    // H
                     t.leks_number = 2;                  g_stack.push(t);    // a
 
@@ -901,7 +901,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                     break;
 
                 case 3: // leksema = +  |   F -> +G
-                        //              |        □□
+                    //              |        □□
                     t.leks_number = -1; t.name = 'G';   g_stack.push(t);    // G
                     t.leks_number = 3;                  g_stack.push(t);    // +
 
@@ -910,7 +910,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                     break;
 
                 case 4: // leksema = -  |   F -> -GZ
-                        //              |        □□~
+                    //              |        □□~
                     t.leks_number = -1; t.name = 'Z';   g_stack.push(t);    // Z
                     t.leks_number = -1; t.name = 'G';   g_stack.push(t);    // G
                     t.leks_number = 4;                  g_stack.push(t);    // -
@@ -923,7 +923,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                     str_position_stack.push(input_leks.get_start_str_position());
                     break;
                 case 7: // leksemma = ( |   F -> (S)
-                        //              |        □□□
+                    //              |        □□□
                     t.leks_number = 8;                  g_stack.push(t);    // )
                     t.leks_number = -1; t.name = 'S';   g_stack.push(t);    // S
                     t.leks_number = 7;                  g_stack.push(t);    // (
@@ -947,14 +947,14 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                 switch (input_leks.get_l_type())
                 {
                 case 1: // leksema = k  |   G -> k
-                        //              |        k
+                    //              |        k
                     t.leks_number = 1;                  g_stack.push(t);    // k
 
                     gen_opc_stack.push(18);  // k
                     break;
 
                 case 2: // leksema = a  |   G -> aH
-                        //              |        a□
+                    //              |        a□
                     t.leks_number = -1; t.name = 'H';   g_stack.push(t);    // H
                     t.leks_number = 2;                  g_stack.push(t);    // a
 
@@ -963,7 +963,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                     break;
 
                 case 7: // leksema = (  |   G -> (S)
-                        //              |        □□□
+                    //              |        □□□
                     t.leks_number = 8;                  g_stack.push(t);    // )
                     t.leks_number = -1; t.name = 'S';   g_stack.push(t);    // S
                     t.leks_number = 7;                  g_stack.push(t);    // (
@@ -987,7 +987,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                 switch (input_leks.get_l_type())
                 {
                 case 16: // leksema = [ |   H -> [S]
-                         //             |        □□i
+                    //             |        □□i
                     t.leks_number = 17;                 g_stack.push(t);    // ]
                     t.leks_number = -1; t.name = 'S';   g_stack.push(t);    // S
                     t.leks_number = 16;                 g_stack.push(t);    // [
@@ -1016,7 +1016,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                 switch (input_leks.get_l_type())
                 {
                 case 1: // leksema = k  |   C -> kVUD
-                        //              |        k□□□
+                    //              |        k□□□
                     t.leks_number = -1; t.name = 'D';   g_stack.push(t);    // D
                     t.leks_number = -1; t.name = 'U';   g_stack.push(t);    // U
                     t.leks_number = -1; t.name = 'V';   g_stack.push(t);    // V
@@ -1029,7 +1029,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                     break;
 
                 case 2: // leksema = a  |   C -> aHVUD
-                        //              |        a□□□□
+                    //              |        a□□□□
                     t.leks_number = -1; t.name = 'D';   g_stack.push(t);    // D
                     t.leks_number = -1; t.name = 'U';   g_stack.push(t);    // U
                     t.leks_number = -1; t.name = 'V';   g_stack.push(t);    // V
@@ -1044,7 +1044,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                     break;
 
                 case 3: // leksema = + | S  ->  +GVUD
-                        //             |        □□□□□
+                    //             |        □□□□□
                     t.leks_number = -1; t.name = 'D';   g_stack.push(t);    // D
                     t.leks_number = -1; t.name = 'U';   g_stack.push(t);    // U
                     t.leks_number = -1; t.name = 'V';   g_stack.push(t);    // V
@@ -1059,7 +1059,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                     break;
 
                 case 4: // leksema = - | S  ->  -GVUD
-                        //             |        □□~□□
+                    //             |        □□~□□
                     t.leks_number = -1; t.name = 'D';   g_stack.push(t);    // D
                     t.leks_number = -1; t.name = 'U';   g_stack.push(t);    // U
                     t.leks_number = -1; t.name = 'V';   g_stack.push(t);    // V
@@ -1076,7 +1076,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                     str_position_stack.push(input_leks.get_start_str_position());
                     break;
                 case 7: // leksema = ( | S  ->  (S)VUD
-                        //             |        □□□□□□
+                    //             |        □□□□□□
                     t.leks_number = -1; t.name = 'D';   g_stack.push(t);    // D
                     t.leks_number = -1; t.name = 'U';   g_stack.push(t);    // U
                     t.leks_number = -1; t.name = 'V';   g_stack.push(t);    // V
@@ -1106,7 +1106,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                 switch (input_leks.get_l_type())
                 {
                 case 10: // leksema = ==    |   D -> ==SZ
-                         //                 |        □□==
+                    //                 |        □□==
                     t.leks_number = -1; t.name = 'Z';   g_stack.push(t);    // Z
                     t.leks_number = -1; t.name = 'S';   g_stack.push(t);    // S
                     t.leks_number = 10;                 g_stack.push(t);    // ==
@@ -1120,7 +1120,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                     break;
 
                 case 11: // leksema = !=    |   D -> !=SZ
-                         //                 |        □□!=
+                    //                 |        □□!=
                     t.leks_number = -1; t.name = 'Z';   g_stack.push(t);    // Z
                     t.leks_number = -1; t.name = 'S';   g_stack.push(t);    // S
                     t.leks_number = 11;                 g_stack.push(t);    // !=
@@ -1134,7 +1134,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                     break;
 
                 case 12: // leksema = > |   D -> >SZ
-                         //             |        □□>
+                    //             |        □□>
                     t.leks_number = -1; t.name = 'Z';   g_stack.push(t);    // Z
                     t.leks_number = -1; t.name = 'S';   g_stack.push(t);    // S
                     t.leks_number = 12;                 g_stack.push(t);    // >
@@ -1148,7 +1148,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                     break;
 
                 case 13: // leksema = < |   D -> <SZ
-                         //             |        □□<
+                    //             |        □□<
                     t.leks_number = -1; t.name = 'Z';   g_stack.push(t);    // Z
                     t.leks_number = -1; t.name = 'S';   g_stack.push(t);    // S
                     t.leks_number = 13;                 g_stack.push(t);    // <
@@ -1162,7 +1162,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                     break;
 
                 case 14: // leksema = >=    |   D -> >=SZ
-                         //                 |        □□>=
+                    //                 |        □□>=
                     t.leks_number = -1; t.name = 'Z';   g_stack.push(t);    // Z
                     t.leks_number = -1; t.name = 'S';   g_stack.push(t);    // S
                     t.leks_number = 14;                 g_stack.push(t);    // >=
@@ -1176,7 +1176,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                     break;
 
                 case 15: // leksema = <=    |   D -> <=SZ
-                         //                 |        □□<=
+                    //                 |        □□<=
                     t.leks_number = -1; t.name = 'Z';   g_stack.push(t);    // Z
                     t.leks_number = -1; t.name = 'S';   g_stack.push(t);    // S
                     t.leks_number = 15;                 g_stack.push(t);    // <=
@@ -1203,7 +1203,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                 switch (input_leks.get_l_type())
                 {
                 case 20: // leksema = else  |   E -> else P endelse
-                         //                 |           2 □  □
+                    //                 |           2 □  □
                     t.leks_number = 21;                 g_stack.push(t);    // endelse
                     t.leks_number = -1; t.name = 'P';   g_stack.push(t);    // P
                     t.leks_number = 20;                 g_stack.push(t);    // else
@@ -1224,7 +1224,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                 switch (input_leks.get_l_type())
                 {
                 case 2: // leksema = a  |   R -> aM
-                        //              |        6□
+                    //              |        6□
                     t.leks_number = -1; t.name = 'M';   g_stack.push(t);    // M
                     t.leks_number = 2;                  g_stack.push(t);    // a
 
@@ -1246,7 +1246,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                 switch (input_leks.get_l_type())
                 {
                 case 29: // leksema = , |   M -> ,aM
-                         //             |        □6□
+                    //             |        □6□
                     t.leks_number = -1; t.name = 'M';   g_stack.push(t);    // M
                     t.leks_number = 2;                  g_stack.push(t);    // a
                     t.leks_number = 29;                 g_stack.push(t);    // ,
@@ -1267,7 +1267,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                 switch (input_leks.get_l_type())
                 {
                 case 2: // leksema = a  |   N -> a[S]O
-                        //              |        7□□m□
+                    //              |        7□□m□
                     t.leks_number = -1; t.name = 'O';   g_stack.push(t);    // O
                     t.leks_number = 17;                 g_stack.push(t);    // ]
                     t.leks_number = -1; t.name = 'S';   g_stack.push(t);    // S
@@ -1298,7 +1298,7 @@ std::vector<OPC_element> imply_Grammar(std::ifstream& program_file, bool& error_
                 switch (input_leks.get_l_type())
                 {
                 case 29: // leksema = , |   O -> ,a[S]O
-                         //             |        □7□□m□
+                    //             |        □7□□m□
                     t.leks_number = -1; t.name = 'O';   g_stack.push(t);    // O
                     t.leks_number = 17;                 g_stack.push(t);    // ]
                     t.leks_number = -1; t.name = 'S';   g_stack.push(t);    // S
@@ -1571,30 +1571,30 @@ struct OPC_operand
             std::cout << "отладочная ошибка 3";
             break;
         }
-        
         return;
     }
 };
 
 void Compute_OPC(std::vector<OPC_element>& OPC, bool error_flag) {
-    std::stack<OPC_operand> OPS_operand_stack; // магазин интерпретатора ОПС
+    std::stack<OPC_operand> OPC_operand_stack; // магазин интерпретатора ОПС
     OPC_operand first_operand, second_operand;
     int fog, sog, result;
     int* id_res;
+    std::string buffer;
 
     for (long long i = 0; i < OPC.size() && !error_flag; ++i) {
         if (OPC[i].element_type == 0) { // операция
             switch (OPC[i].value)
             {
             case 1:  // +
-                second_operand = OPS_operand_stack.top();
-                OPS_operand_stack.pop();
+                second_operand = OPC_operand_stack.top();
+                OPC_operand_stack.pop();
                 sog = second_operand.get();
-                first_operand = OPS_operand_stack.top();
-                OPS_operand_stack.pop();
+                first_operand = OPC_operand_stack.top();
+                OPC_operand_stack.pop();
                 fog = first_operand.get();
-
-                if ((fog > 0)  && (sog > 0) && (fog > INT_MAX - sog)) {
+                /*
+                if ((fog > 0) && (sog > 0) && (fog > INT_MAX - sog)) {
                     error_flag = true;
                     std::cout << "Строка: " << OPC[i].str_number << " Позиция: " << OPC[i].str_position
                         << "\nОписание: Переполнение памяти при выполнении операции \"" << OPC_operation_list[OPC[i].value - 1] << '"' << std::endl;
@@ -1605,19 +1605,20 @@ void Compute_OPC(std::vector<OPC_element>& OPC, bool error_flag) {
                         << "\nОписание: Переполнение памяти при выполнении операции \"" << OPC_operation_list[OPC[i].value - 1] << '"' << std::endl;
                 }
                 else {
-                    result = fog + sog;
-                    OPS_operand_stack.push(OPC_operand(1, result, NULL, NULL));
-                }
+
+                }*/
+                result = fog + sog;
+                OPC_operand_stack.push(OPC_operand(1, result, NULL, NULL));
                 break;
 
             case 2:  // -
-                second_operand = OPS_operand_stack.top();
-                OPS_operand_stack.pop();
+                second_operand = OPC_operand_stack.top();
+                OPC_operand_stack.pop();
                 sog = second_operand.get();
-                first_operand = OPS_operand_stack.top();
-                OPS_operand_stack.pop();
+                first_operand = OPC_operand_stack.top();
+                OPC_operand_stack.pop();
                 fog = first_operand.get();
-
+                /*
                 if ((fog > 0) && (sog < 0) && (fog > INT_MAX + sog)) {
                     error_flag = true;
                     std::cout << "Строка: " << OPC[i].str_number << " Позиция: " << OPC[i].str_position
@@ -1629,29 +1630,31 @@ void Compute_OPC(std::vector<OPC_element>& OPC, bool error_flag) {
                         << "\nОписание: Переполнение памяти при выполнении операции." << std::endl;
                 }
                 else {
-                    result = fog - sog;
-                    OPS_operand_stack.push(OPC_operand(1, result, NULL, NULL));
+
                 }
+                */
+                result = fog - sog;
+                OPC_operand_stack.push(OPC_operand(1, result, NULL, NULL));
                 break;
 
             case 3:  // *
-                second_operand = OPS_operand_stack.top();
-                OPS_operand_stack.pop();
+                second_operand = OPC_operand_stack.top();
+                OPC_operand_stack.pop();
                 sog = second_operand.get();
-                first_operand = OPS_operand_stack.top();
-                OPS_operand_stack.pop();
+                first_operand = OPC_operand_stack.top();
+                OPC_operand_stack.pop();
                 fog = first_operand.get();
 
                 result = fog * sog;
-                OPS_operand_stack.push(OPC_operand(1, result, NULL, NULL));
+                OPC_operand_stack.push(OPC_operand(1, result, NULL, NULL));
                 break;
 
             case 4:  // /
-                second_operand = OPS_operand_stack.top();
-                OPS_operand_stack.pop();
+                second_operand = OPC_operand_stack.top();
+                OPC_operand_stack.pop();
                 sog = second_operand.get();
-                first_operand = OPS_operand_stack.top();
-                OPS_operand_stack.pop();
+                first_operand = OPC_operand_stack.top();
+                OPC_operand_stack.pop();
                 fog = first_operand.get();
 
                 if (sog == 0) {
@@ -1661,130 +1664,170 @@ void Compute_OPC(std::vector<OPC_element>& OPC, bool error_flag) {
                 }
                 else {
                     result = fog / sog;
-                    OPS_operand_stack.push(OPC_operand(1, result, NULL, NULL));
+                    OPC_operand_stack.push(OPC_operand(1, result, NULL, NULL));
                 }
                 break;
 
             case 5:  // =
-                second_operand = OPS_operand_stack.top();
-                OPS_operand_stack.pop();
+                second_operand = OPC_operand_stack.top();
+                OPC_operand_stack.pop();
                 sog = second_operand.get();
-                first_operand = OPS_operand_stack.top();
-                OPS_operand_stack.pop();
-                
+                first_operand = OPC_operand_stack.top();
+                OPC_operand_stack.pop();
+
                 first_operand.set(sog);
-                OPS_operand_stack.push(first_operand);
+                OPC_operand_stack.push(first_operand);
                 break;
 
             case 6:  // ==
-                second_operand = OPS_operand_stack.top();
-                OPS_operand_stack.pop();
+                second_operand = OPC_operand_stack.top();
+                OPC_operand_stack.pop();
                 sog = second_operand.get();
-                first_operand = OPS_operand_stack.top();
-                OPS_operand_stack.pop();
+                first_operand = OPC_operand_stack.top();
+                OPC_operand_stack.pop();
                 fog = first_operand.get();
 
-                if (fog == sog) { OPS_operand_stack.push(OPC_operand(1, 1, NULL, NULL)); }
-                else { OPS_operand_stack.push(OPC_operand(1, 0, NULL, NULL)); }
+                if (fog == sog) { OPC_operand_stack.push(OPC_operand(1, 1, NULL, NULL)); }
+                else { OPC_operand_stack.push(OPC_operand(1, 0, NULL, NULL)); }
                 break;
 
             case 7:  // >=    
-                second_operand = OPS_operand_stack.top();
-                OPS_operand_stack.pop();
+                second_operand = OPC_operand_stack.top();
+                OPC_operand_stack.pop();
                 sog = second_operand.get();
-                first_operand = OPS_operand_stack.top();
-                OPS_operand_stack.pop();
+                first_operand = OPC_operand_stack.top();
+                OPC_operand_stack.pop();
                 fog = first_operand.get();
 
-                if (fog >= sog) { OPS_operand_stack.push(OPC_operand(1, 1, NULL, NULL)); }
-                else { OPS_operand_stack.push(OPC_operand(1, 0, NULL, NULL)); }
-                break;
+                if (fog >= sog) { OPC_operand_stack.push(OPC_operand(1, 1, NULL, NULL)); }
+                else { OPC_operand_stack.push(OPC_operand(1, 0, NULL, NULL)); }
                 break;
 
             case 8:  // <=     
-                second_operand = OPS_operand_stack.top();
-                OPS_operand_stack.pop();
+                second_operand = OPC_operand_stack.top();
+                OPC_operand_stack.pop();
                 sog = second_operand.get();
-                first_operand = OPS_operand_stack.top();
-                OPS_operand_stack.pop();
+                first_operand = OPC_operand_stack.top();
+                OPC_operand_stack.pop();
                 fog = first_operand.get();
 
-                if (fog <= sog) { OPS_operand_stack.push(OPC_operand(1, 1, NULL, NULL)); }
-                else { OPS_operand_stack.push(OPC_operand(1, 0, NULL, NULL)); }
+                if (fog <= sog) { OPC_operand_stack.push(OPC_operand(1, 1, NULL, NULL)); }
+                else { OPC_operand_stack.push(OPC_operand(1, 0, NULL, NULL)); }
                 break;
 
             case 9:  // >
-                second_operand = OPS_operand_stack.top();
-                OPS_operand_stack.pop();
+                second_operand = OPC_operand_stack.top();
+                OPC_operand_stack.pop();
                 sog = second_operand.get();
-                first_operand = OPS_operand_stack.top();
-                OPS_operand_stack.pop();
+                first_operand = OPC_operand_stack.top();
+                OPC_operand_stack.pop();
                 fog = first_operand.get();
 
-                if (fog > sog) { OPS_operand_stack.push(OPC_operand(1, 1, NULL, NULL)); }
-                else { OPS_operand_stack.push(OPC_operand(1, 0, NULL, NULL)); }
+                if (fog > sog) { OPC_operand_stack.push(OPC_operand(1, 1, NULL, NULL)); }
+                else { OPC_operand_stack.push(OPC_operand(1, 0, NULL, NULL)); }
                 break;
 
             case 10: // <
-                second_operand = OPS_operand_stack.top();
-                OPS_operand_stack.pop();
+                second_operand = OPC_operand_stack.top();
+                OPC_operand_stack.pop();
                 sog = second_operand.get();
-                first_operand = OPS_operand_stack.top();
-                OPS_operand_stack.pop();
+                first_operand = OPC_operand_stack.top();
+                OPC_operand_stack.pop();
                 fog = first_operand.get();
 
-                if (fog < sog) { OPS_operand_stack.push(OPC_operand(1, 1, NULL, NULL)); }
-                else { OPS_operand_stack.push(OPC_operand(1, 0, NULL, NULL)); }
+                if (fog < sog) { OPC_operand_stack.push(OPC_operand(1, 1, NULL, NULL)); }
+                else { OPC_operand_stack.push(OPC_operand(1, 0, NULL, NULL)); }
                 break;
 
             case 11: // !=
-                second_operand = OPS_operand_stack.top();
-                OPS_operand_stack.pop();
+                second_operand = OPC_operand_stack.top();
+                OPC_operand_stack.pop();
                 sog = second_operand.get();
-                first_operand = OPS_operand_stack.top();
-                OPS_operand_stack.pop();
+                first_operand = OPC_operand_stack.top();
+                OPC_operand_stack.pop();
                 fog = first_operand.get();
 
-                if (fog != sog) { OPS_operand_stack.push(OPC_operand(1, 1, NULL, NULL)); }
-                else { OPS_operand_stack.push(OPC_operand(1, 0, NULL, NULL)); }
+                if (fog != sog) { OPC_operand_stack.push(OPC_operand(1, 1, NULL, NULL)); }
+                else { OPC_operand_stack.push(OPC_operand(1, 0, NULL, NULL)); }
                 break;
 
             case 12: // ~
-                first_operand = OPS_operand_stack.top();
-                OPS_operand_stack.pop();
+                first_operand = OPC_operand_stack.top();
+                OPC_operand_stack.pop();
                 fog = first_operand.get();
-
+                /*
                 if (fog == INT_MIN) {
                     error_flag = true;
                     std::cout << "Строка: " << OPC[i].str_number << " Позиция: " << OPC[i].str_position
                         << "\nОписание: Переполнение памяти при выполнении операции." << std::endl;
                 }
                 else {
-                    OPS_operand_stack.push(OPC_operand(1, -fog, NULL, NULL));
+
                 }
+                */
+                OPC_operand_stack.push(OPC_operand(1, -fog, NULL, NULL));
                 break;
 
             case 13: // r
-                first_operand = OPS_operand_stack.top();
-                OPS_operand_stack.pop();
+                first_operand = OPC_operand_stack.top();
+                OPC_operand_stack.pop();
+                result = 0;
+                std::cin >> buffer;
+                if (buffer[0] == '-' && !error_flag) {
+                    for (int str_i = 1; str_i < buffer.size() && !error_flag; ++str_i) {
+                        if (isdigit(buffer[str_i])) { // проверка на цифру
+                            result = result * 10 + (buffer[str_i] - '0');
+                        }
+                        else {
+                            error_flag = true;
+                            std::cout << "Строка: " << OPC[i].str_number << " Позиция: " << OPC[i].str_position
+                                << "\nОписание: Некорректный ввод." << std::endl;
+                        }
+                    }
+                    result *= (-1);
+                }
+                else if (buffer[0] == '+' && !error_flag) {
+                    for (int str_i = 1; str_i < buffer.size() && !error_flag; ++str_i) {
+                        if (isdigit(buffer[str_i])) { // проверка на цифру
+                            result = result * 10 + (buffer[str_i] - '0');
+                        }
+                        else {
+                            error_flag = true;
+                            std::cout << "Строка: " << OPC[i].str_number << " Позиция: " << OPC[i].str_position
+                                << "\nОписание: Некорректный ввод." << std::endl;
+                        }
+                    }
+                }
+                else if (!error_flag) {
+                    for (int str_i = 0; str_i < buffer.size() && !error_flag; ++str_i) {
+                        if (isdigit(buffer[str_i])) { // проверка на цифру
+                            result = result * 10 + (buffer[str_i] - '0');
+                        }
+                        else {
+                            error_flag = true;
+                            std::cout << "Строка: " << OPC[i].str_number << " Позиция: " << OPC[i].str_position
+                                << "\nОписание: Некорректный ввод." << std::endl;
+                        }
+                    }
+                }
 
-                if (first_operand.operand_type == 2) { std::cin >> *first_operand.a; }
-                else { std::cin >> *first_operand.m->link; }
+                if (first_operand.operand_type == 2) { *first_operand.a = result; }
+                else { *(first_operand.m->link) = result; }
                 break;
 
             case 14: // w
-                first_operand = OPS_operand_stack.top();
-                OPS_operand_stack.pop();
+                first_operand = OPC_operand_stack.top();
+                OPC_operand_stack.pop();
                 fog = first_operand.get();
-                std::cout << fog << ' ';//<< std::endl;
+                std::cout << fog << ' ';
                 break;
 
             case 15: // m
-                second_operand = OPS_operand_stack.top();
-                OPS_operand_stack.pop();
+                second_operand = OPC_operand_stack.top();
+                OPC_operand_stack.pop();
                 sog = second_operand.get();
-                first_operand = OPS_operand_stack.top();
-                OPS_operand_stack.pop();
+                first_operand = OPC_operand_stack.top();
+                OPC_operand_stack.pop();
 
                 if (sog <= 0) {
                     error_flag = true;
@@ -1797,11 +1840,11 @@ void Compute_OPC(std::vector<OPC_element>& OPC, bool error_flag) {
                 }
                 break;
             case 16: // i
-                second_operand = OPS_operand_stack.top();
-                OPS_operand_stack.pop();
+                second_operand = OPC_operand_stack.top();
+                OPC_operand_stack.pop();
                 sog = second_operand.get();
-                first_operand = OPS_operand_stack.top();
-                OPS_operand_stack.pop();
+                first_operand = OPC_operand_stack.top();
+                OPC_operand_stack.pop();
 
                 if (sog < 0 || sog >= first_operand.m->size) {
                     error_flag = true;
@@ -1810,16 +1853,16 @@ void Compute_OPC(std::vector<OPC_element>& OPC, bool error_flag) {
                 }
                 else {
                     id_res = first_operand.m->link + sog;
-                    OPS_operand_stack.push(OPC_operand(2, NULL, id_res, NULL));
+                    OPC_operand_stack.push(OPC_operand(2, NULL, id_res, NULL));
                 }
                 break;
 
             case 17: // jf (переход по условию ложь)
-                second_operand = OPS_operand_stack.top();
-                OPS_operand_stack.pop();
+                second_operand = OPC_operand_stack.top();
+                OPC_operand_stack.pop();
                 sog = second_operand.get();
-                first_operand = OPS_operand_stack.top();
-                OPS_operand_stack.pop();
+                first_operand = OPC_operand_stack.top();
+                OPC_operand_stack.pop();
                 fog = first_operand.get();
 
                 if (fog == 0) {
@@ -1828,8 +1871,8 @@ void Compute_OPC(std::vector<OPC_element>& OPC, bool error_flag) {
                 break;
 
             case 18: // j (безусловный переход)
-                first_operand = OPS_operand_stack.top();
-                OPS_operand_stack.pop();
+                first_operand = OPC_operand_stack.top();
+                OPC_operand_stack.pop();
                 fog = first_operand.get();
 
                 i = fog - 1;
@@ -1847,7 +1890,7 @@ void Compute_OPC(std::vector<OPC_element>& OPC, bool error_flag) {
             }
         }
         else { // операнд
-            OPS_operand_stack.push(OPC[i]);
+            OPC_operand_stack.push(OPC[i]);
         }
     }
     if (error_flag) { // Освобождение памяти при ошибке
@@ -1870,7 +1913,7 @@ int main()
     Passport_table.reserve(SHRT_MAX);
     std::vector<OPC_element> OPC;
     OPC = imply_Grammar(program_file, error_flag);
-
+    /*
     if (!error_flag) {
         for (int i = 0; i < OPC.size(); ++i) {
             std::cout << i << ' ';
@@ -1899,6 +1942,7 @@ int main()
             }
         }
     }
+    */
     std::cout << "\n\n---------------Вычисление ОПС---------------\n\n";
     Compute_OPC(OPC, error_flag);
 
